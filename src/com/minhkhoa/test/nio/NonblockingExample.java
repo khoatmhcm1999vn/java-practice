@@ -92,7 +92,7 @@ public class NonblockingExample {
 
     public static void main(String[] args) {
         NonblockingExample nio = new NonblockingExample();
-        String users[] = new String[] {"mk12", "meta"};
+        String[] users = new String[] {"mk12", "meta"};
         for (String user : users) {
             nio.receivedUserRequest("userInfoGet:" + user);
             nio.receivedUserRequest("friendListGet:" + user);

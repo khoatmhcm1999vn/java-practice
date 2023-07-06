@@ -60,22 +60,22 @@ public class BlockingIOExample {
 
     public static class Database {
         public String getUserInfo(String userId) {
-            deplay(1000);
+            delay(1000);
             return "id: " + userId + ", name: Monkey";
         }
 
         public String getFriendList(String userId) {
-            deplay(1000);
+            delay(1000);
             return "fox, cat";
         }
 
         public String getMessageList(String userId) {
-            deplay(1000);
+            delay(1000);
             return "hello, world";
         }
     }
 
-    private static void deplay(int time) {
+    private static void delay(int time) {
         try {
             Thread.sleep(time);
         } catch (InterruptedException e) { }
