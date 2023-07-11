@@ -1,15 +1,19 @@
-package com.minhkhoa.test.nio;
+package com.minhkhoa.example.nio;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-public class BlockingIOExample {
+public class NonblockingExample {
 
     private final Database database;
+    private final ExecutorService executorService;
     private final Map<String, Handler> userRequestHandlers;
 
-    public BlockingIOExample() {
+    public NonblockingExample() {
         database = new Database();
+        executorService = Executors.newFixedThreadPool(10);
         userRequestHandlers = new HashMap<>();
         userRequestHandlers.put("userInfoGet", database::getUserInfo);
         userRequestHandlers.put("friendListGet", database::getFriendList);
@@ -18,13 +22,18 @@ public class BlockingIOExample {
 
     public void receivedUserRequest(String requestInput) {
         Request request = processRequestInput(requestInput);
-        Object response = handlerRequest(request);
-        responseToUser(request.getUserId(), response);
+        executorService.execute(() -> {
+            Object response = handlerRequest(request);
+            executorService.execute(() ->
+                    responseToUser(request.getUserId(), response)
+            );
+        });
     }
 
     private Object handlerRequest(Request request) {
         Handler handler = userRequestHandlers.get(request.getApi());
-        return handler.handle(request.getUserId());
+        Object result = handler.handle(request.getUserId());
+        return result;
     }
 
     private void responseToUser(String userId, Object responseData) {
@@ -34,6 +43,12 @@ public class BlockingIOExample {
     private Request processRequestInput(String requestInput) {
         String[] apiData = requestInput.split(":");
         return new Request(apiData[0], apiData[1]);
+    }
+
+    private static void delay(int time) {
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) { }
     }
 
     public interface Handler {
@@ -75,16 +90,13 @@ public class BlockingIOExample {
         }
     }
 
-    private static void delay(int time) {
-        try {
-            Thread.sleep(time);
-        } catch (InterruptedException e) { }
-    }
-
     public static void main(String[] args) {
-        BlockingIOExample nio = new BlockingIOExample();
-        nio.receivedUserRequest("userInfoGet:mk12");
-        nio.receivedUserRequest("friendListGet:mk12");
-        nio.receivedUserRequest("messageListGet:mk12");
+        NonblockingExample nio = new NonblockingExample();
+        String[] users = new String[] {"mk12", "meta"};
+        for (String user : users) {
+            nio.receivedUserRequest("userInfoGet:" + user);
+            nio.receivedUserRequest("friendListGet:" + user);
+            nio.receivedUserRequest("messageListGet:" + user);
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.minhkhoa.test.nio.concurrency.sync;
+package com.minhkhoa.example.concurrency.sync;
 
 public class VolatileBooleanExample {
 
