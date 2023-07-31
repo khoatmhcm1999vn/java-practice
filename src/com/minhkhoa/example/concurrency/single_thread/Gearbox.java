@@ -15,8 +15,8 @@ public class Gearbox {
         Gear neutral = new Gear(0, 0.0);
         this.gears.add(neutral);
 
-        for(int i=0; i<maxGears; i++) {
-            addGear(i, i*5.3);
+        for (int i = 0; i < maxGears; i++) {
+            addGear(i, i * 5.3);
         }
     }
 
@@ -25,7 +25,7 @@ public class Gearbox {
     }
 
     public void addGear(int number, double ratio) {
-        if((number > 0) && (number <= maxGears)) {
+        if ((number > 0) && (number <= maxGears)) {
             this.gears.add(new Gear(number, ratio));
         }
     }
@@ -41,14 +41,14 @@ public class Gearbox {
     }
 
     public double wheelSpeed(int revs) {
-        if(clutchIsIn) {
+        if (clutchIsIn) {
             System.out.println("Scream!!");
             return 0.0;
         }
         return revs * gears.get(currentGear).getRatio();
     }
 
-    private class Gear{
+    private class Gear {
         private int gearNumber;
         private double ratio;
 
