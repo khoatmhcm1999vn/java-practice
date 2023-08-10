@@ -15,7 +15,7 @@ public class ArrayListPresentation {
 
         arrList.reverse();
         Iterator<Integer> iterator = arrList.iterator();
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             System.out.println(iterator.next());
         }
     }
