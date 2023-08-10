@@ -12,11 +12,13 @@ public class Main {
             int choice = scanner.nextInt();
             scanner.nextLine();
             switch (choice) {
-                case 0:
+                case 0: {
                     quit = true;
                     break;
-                case 1:
+                }
+                case 1: {
                     btnPrint.onClick();
+                }
             }
         }
     }
@@ -36,23 +38,23 @@ public class Main {
 
         btnPrint.setOnClickListener(new Button.OnClickListener() {
             @Override
-            public void onClick(String title){
+            public void onClick(String title) {
                 System.out.println(title + " was Clicked");
             }
         });
 //
 //        btnPrint.setOnClickListener(new ClickListener());
-        listen();
+        //listen();
 
-//        Gearbox mcLaren = new Gearbox(6);
-//        mcLaren.operateClutch(true);
-//        mcLaren.changeGear(1);
-//        mcLaren.operateClutch(false);
-//        System.out.println(mcLaren.wheelSpeed(1000));
-//        mcLaren.changeGear(2);
-//        System.out.println(mcLaren.wheelSpeed(3000));
-//        mcLaren.changeGear(3);
-//        mcLaren.operateClutch(false);
-//        System.out.println(mcLaren.wheelSpeed(6000));
+        Gearbox mcLaren = new Gearbox(6);
+        mcLaren.operateClutch(true);
+        mcLaren.changeGear(1);
+        mcLaren.operateClutch(false);
+        System.out.println(mcLaren.wheelSpeed(1000));
+        mcLaren.changeGear(2);
+        System.out.println(mcLaren.wheelSpeed(3000));
+        mcLaren.changeGear(3);
+        mcLaren.operateClutch(false);
+        System.out.println(mcLaren.wheelSpeed(6000));
     }
 }
