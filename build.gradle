@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'com.github.johnrengelman.shadow' version '7.1.1'
+}
+
+allprojects {
+    group 'com.mk.examples'
+    version '1.0.0'
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.minhkhoa.VivaconApplication'
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'com.tvd12:ezyfox-bean:' + ezyfoxVersion
+        implementation 'com.fasterxml.jackson.core:jackson-databind:' + jacksonVersion
+
+        compileOnly 'org.projectlombok:lombok:' + lombokVersion
+        annotationProcessor 'org.projectlombok:lombok:' + lombokVersion
+
+        testImplementation 'com.tvd12:test-util:' + testUtilVersion
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:' + jupiterVersion
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
