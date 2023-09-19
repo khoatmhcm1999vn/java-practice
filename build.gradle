@@ -8,7 +8,6 @@ allprojects {
     group 'com.mk.examples'
     version '1.0.0'
 
-
     repositories {
         mavenCentral()
     }
@@ -33,26 +32,30 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
+test {
+    useJUnitPlatform()
+}
+
 subprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
 
-    sourceCompatibility = 1.8
+    sourceCompatibility = 11
 
     repositories {
         mavenCentral()
     }
 
     dependencies {
-//        implementation 'com.tvd12:ezyfox-bean:' + ezyfoxVersion
-//        implementation 'com.fasterxml.jackson.core:jackson-databind:' + jacksonVersion
-//
-//        compileOnly 'org.projectlombok:lombok:' + lombokVersion
-//        annotationProcessor 'org.projectlombok:lombok:' + lombokVersion
-//
-//        testImplementation 'com.tvd12:test-util:' + testUtilVersion
-//        testImplementation 'org.junit.jupiter:junit-jupiter-api:' + jupiterVersion
-//        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+        implementation 'com.tvd12:ezyfox-bean:' + ezyfoxVersion
+        implementation 'com.fasterxml.jackson.core:jackson-databind:' + jacksonVersion
+
+        compileOnly 'org.projectlombok:lombok:' + lombokVersion
+        annotationProcessor 'org.projectlombok:lombok:' + lombokVersion
+
+        testImplementation 'com.tvd12:test-util:' + testUtilVersion
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:' + jupiterVersion
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     }
 
     test {

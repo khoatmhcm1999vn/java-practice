@@ -1,1 +1,4 @@
+include ':common'
+include ':clean-code'
+include ':java-core'
 rootProject.name = 'java-practice'
