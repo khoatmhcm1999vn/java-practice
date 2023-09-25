@@ -28,7 +28,7 @@ public class ExceptionTree {
                 children.add(node);
             }
         }
-        if (children.size() > 0) {
+        if (!children.isEmpty()) {
             Node newRootNode = new Node(exceptionClass, children);
             existedNodes.removeAll(children);
             existedNodes.add(newRootNode);

@@ -21,9 +21,9 @@ public class ExceptionClassesSorter {
 
         list.sort(new Compa());
 
-        System.out.println(String.join("\n", list.stream()
-            .map(t -> t.toString())
-            .collect(Collectors.toList())));
+        System.out.println(list.stream()
+            .map(Class::toString)
+            .collect(Collectors.joining("\n")));
 
         TreeMap<Class<?>, Class<?>> map = new TreeMap<>(new Compa());
         map.put(Ex2Branch2Exception.class, Ex2Branch2Exception.class);
@@ -36,9 +36,9 @@ public class ExceptionClassesSorter {
         map.put(RootException.class, RootException.class);
 
         System.out.println("\n================================");
-        System.out.println(String.join("\n", map.keySet().stream()
-            .map(t -> t.toString())
-            .collect(Collectors.toList())));
+        System.out.println(map.keySet().stream()
+            .map(Class::toString)
+            .collect(Collectors.joining("\n")));
 
         System.out.println("\n================================");
         ExceptionTree tree = new ExceptionTree();
