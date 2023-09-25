@@ -70,6 +70,7 @@ public class ArrayList<T> extends AbstractList<T> {
         return currentIndex;
     }
 
+    @Override
     public boolean insert(T inValue) {
         if (this.currentIndex == this.length) {
             Object[] tempArr = this.array;

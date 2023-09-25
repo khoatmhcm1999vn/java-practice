@@ -94,6 +94,7 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements L
         return null;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (o == this) {
             return true;

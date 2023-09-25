@@ -10,14 +10,15 @@ public abstract class AbstractCollection<E> implements Collection<E> {
     protected AbstractCollection() {
     }
 
-    public abstract Iterator<E> iterator();
-
+    @Override
     public abstract int size();
 
+    @Override
     public boolean isEmpty() {
         return size() == 0;
     }
 
+    @Override
     public boolean contains(Object o) {
         Iterator<E> it = iterator();
         if (o == null) {
@@ -36,6 +37,10 @@ public abstract class AbstractCollection<E> implements Collection<E> {
         return false;
     }
 
+    @Override
+    public abstract Iterator<E> iterator();
+
+    @Override
     public Object[] toArray() {
         Object[] r = new Object[size()];
         Iterator<E> it = iterator();
@@ -48,6 +53,7 @@ public abstract class AbstractCollection<E> implements Collection<E> {
         return it.hasNext() ? finishToArray(r, it) : r;
     }
 
+    @Override
     public <T> T[] toArray(T[] a) {
         int size = size();
         T[] r = a.length >= size ? a :
@@ -75,36 +81,11 @@ public abstract class AbstractCollection<E> implements Collection<E> {
         return it.hasNext() ? finishToArray(r, it) : r;
     }
 
-    private static <T> T[] finishToArray(T[] r, Iterator<?> it) {
-        int i = r.length;
-        while (it.hasNext()) {
-            int cap = r.length;
-            if (i == cap) {
-                int newCap = cap + (cap >> 1) + 1;
-                // overflow-conscious code
-                if (newCap - MAX_ARRAY_SIZE > 0)
-                    newCap = hugeCapacity(cap + 1);
-                r = Arrays.copyOf(r, newCap);
-            }
-            r[i++] = (T) it.next();
-        }
-        // trim if overallocated
-        return (i == r.length) ? r : Arrays.copyOf(r, i);
-    }
-
-    private static int hugeCapacity(int minCapacity) {
-        if (minCapacity < 0) // overflow
-            throw new OutOfMemoryError
-                    ("Required array size too large");
-        return (minCapacity > MAX_ARRAY_SIZE) ?
-                Integer.MAX_VALUE :
-                MAX_ARRAY_SIZE;
-    }
-
     public boolean add(E e) {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public boolean remove(Object o) {
         Iterator<E> it = iterator();
         if (o == null) {
@@ -125,6 +106,7 @@ public abstract class AbstractCollection<E> implements Collection<E> {
         return false;
     }
 
+    @Override
     public boolean containsAll(java.util.Collection<?> c) {
         for (Object e : c) {
             if (!contains(e)) {
@@ -134,6 +116,7 @@ public abstract class AbstractCollection<E> implements Collection<E> {
         return true;
     }
 
+    @Override
     public boolean addAll(java.util.Collection<? extends E> c) {
         boolean modified = false;
         for (E e : c) {
@@ -144,6 +127,7 @@ public abstract class AbstractCollection<E> implements Collection<E> {
         return modified;
     }
 
+    @Override
     public boolean removeAll(java.util.Collection<?> c) {
         Objects.requireNonNull(c);
         boolean modified = false;
@@ -157,7 +141,8 @@ public abstract class AbstractCollection<E> implements Collection<E> {
         return modified;
     }
 
-    public boolean retainAll(Collection<?> c) {
+    @Override
+    public boolean retainAll(java.util.Collection<?> c) {
         Objects.requireNonNull(c);
         boolean modified = false;
         Iterator<E> it = iterator();
@@ -170,6 +155,7 @@ public abstract class AbstractCollection<E> implements Collection<E> {
         return modified;
     }
 
+    @Override
     public void clear() {
         Iterator<E> it = iterator();
         while (it.hasNext()) {
@@ -194,5 +180,31 @@ public abstract class AbstractCollection<E> implements Collection<E> {
             }
             sb.append(',').append(' ');
         }
+    }
+
+    private static <T> T[] finishToArray(T[] r, Iterator<?> it) {
+        int i = r.length;
+        while (it.hasNext()) {
+            int cap = r.length;
+            if (i == cap) {
+                int newCap = cap + (cap >> 1) + 1;
+                // overflow-conscious code
+                if (newCap - MAX_ARRAY_SIZE > 0)
+                    newCap = hugeCapacity(cap + 1);
+                r = Arrays.copyOf(r, newCap);
+            }
+            r[i++] = (T) it.next();
+        }
+        // trim if overallocated
+        return (i == r.length) ? r : Arrays.copyOf(r, i);
+    }
+
+    private static int hugeCapacity(int minCapacity) {
+        if (minCapacity < 0) // overflow
+            throw new OutOfMemoryError
+                    ("Required array size too large");
+        return (minCapacity > MAX_ARRAY_SIZE) ?
+                Integer.MAX_VALUE :
+                MAX_ARRAY_SIZE;
     }
 }

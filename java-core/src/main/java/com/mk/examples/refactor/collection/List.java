@@ -8,6 +8,8 @@ public interface List<T> extends Collection<T> {
 
     void reverse();
 
+    boolean insert(T value);
+
     boolean insertAt(T value, int index);
 
     int indexOf(T value);
