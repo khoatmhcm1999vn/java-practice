@@ -123,7 +123,7 @@ public class LinkedList<T> extends AbstractList<T> {
 
     @Override
     public T getAt(int index) {
-        if (!checkInputIndex(index)) {
+        if (checkInputIndex(index)) {
             return null;
         }
         Iterator<T> iterator = this.iterator();

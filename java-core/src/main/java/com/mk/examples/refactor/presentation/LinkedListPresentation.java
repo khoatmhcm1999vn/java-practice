@@ -9,7 +9,11 @@ public class LinkedListPresentation {
 
     public static void main(String[] args) {
         List<Integer> linkedList = new LinkedList<>();
-        linkedList.insertAt(20, 1);
+
+        linkedList.insert(3);
+        linkedList.insert(4);
+        linkedList.insert(9);
+        //linkedList.insertAt(20, 1);
 
         System.out.println(linkedList);
         System.out.println(linkedList.size());
@@ -21,7 +25,7 @@ public class LinkedListPresentation {
 
         Iterator<Integer> iterator = linkedList.iterator();
         while (iterator.hasNext()) {
-            System.out.print(iterator.next());
+            System.out.print(iterator.next() + " ");
         }
         System.out.println();
 

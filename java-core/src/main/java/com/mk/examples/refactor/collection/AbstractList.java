@@ -80,6 +80,7 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements L
         return modified;
     }
 
+    @Override
     public Iterator<E> iterator() {
         return new Itr();
     }
@@ -115,6 +116,7 @@ public abstract class AbstractList<E> extends AbstractCollection<E> implements L
         return !(e1.hasNext() || e2.hasNext());
     }
 
+    @Override
     public int hashCode() {
         int hashCode = 1;
         Iterator<E> iterator = this.iterator();
