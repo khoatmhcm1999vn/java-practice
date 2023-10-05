@@ -1,12 +1,12 @@
 package com.mk.examples.controller;
 
-import com.vuluong.converter.RequestToModelConverter;
-import com.vuluong.manager.BeanManager;
-import com.vuluong.model.AccessTokenModel;
-import com.vuluong.request.LoginRequest;
-import com.vuluong.response.LoginResponse;
-import com.vuluong.service.AuthenticationService;
-import com.vuluong.validator.LoginValidator;
+import com.mk.examples.converter.RequestToModelConverter;
+import com.mk.examples.manager.BeanManager;
+import com.mk.examples.model.AccessTokenModel;
+import com.mk.examples.request.LoginRequest;
+import com.mk.examples.response.LoginResponse;
+import com.mk.examples.service.AuthenticationService;
+import com.mk.examples.validator.LoginValidator;
 
 public class LoginController {
 
