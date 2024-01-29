@@ -6,7 +6,7 @@ public class ArrayListIterator<T> implements Iterator<T> {
 
 	private ArrayList<T> arrayList;
 	
-	private int currentIndex; 
+	private int currentIndex;
 	
 	public ArrayListIterator(ArrayList<T> arrayList) {
 		this.arrayList = arrayList;
@@ -22,4 +22,5 @@ public class ArrayListIterator<T> implements Iterator<T> {
 	public T next() {		
 		return (T) (this.arrayList.getAt(this.currentIndex++));
 	}
+
 }

@@ -1,12 +1,15 @@
 package com.mk.examples.example.concurrency.single_thread;
 
 public class Button {
-    private String title;
+
+    private final String title;
+
     private OnClickListener onClickListener;
 
     public Button(String title) {
         this.title = title;
     }
+
     public String getTitle() {
         return title;
     }
@@ -20,6 +23,9 @@ public class Button {
     }
 
     public interface OnClickListener {
-        public void onClick(String title);
+
+        void onClick(String title);
+
     }
+
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 public class BlockingIOExample {
 
     private final Database database;
+
     private final Map<String, Handler> userRequestHandlers;
 
     public BlockingIOExample() {
@@ -17,9 +18,9 @@ public class BlockingIOExample {
     }
 
     public void receivedUserRequest(String requestInput) {
-        Request request = processRequestInput(requestInput);
-        Object response = handlerRequest(request);
-        responseToUser(request.getUserId(), response);
+        Request request = this.processRequestInput(requestInput);
+        Object response = this.handlerRequest(request);
+        this.responseToUser(request.getUserId(), response);
     }
 
     private Object handlerRequest(Request request) {
@@ -37,11 +38,15 @@ public class BlockingIOExample {
     }
 
     public interface Handler {
+
         Object handle(String userId);
+
     }
 
     public static class Request {
+
         private final String api;
+
         private final String userId;
 
         public Request(String api, String userId) {
@@ -50,15 +55,17 @@ public class BlockingIOExample {
         }
 
         public String getApi() {
-            return api;
+            return this.api;
         }
 
         public String getUserId() {
-            return userId;
+            return this.userId;
         }
+
     }
 
     public static class Database {
+
         public String getUserInfo(String userId) {
             delay(1000);
             return "id: " + userId + ", name: Monkey";
@@ -73,6 +80,7 @@ public class BlockingIOExample {
             delay(1000);
             return "hello, world";
         }
+
     }
 
     private static void delay(int time) {
@@ -87,4 +95,5 @@ public class BlockingIOExample {
         nio.receivedUserRequest("friendListGet:mk12");
         nio.receivedUserRequest("messageListGet:mk12");
     }
+
 }

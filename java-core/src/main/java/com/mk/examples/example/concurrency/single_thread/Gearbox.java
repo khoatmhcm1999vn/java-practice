@@ -3,9 +3,13 @@ package com.mk.examples.example.concurrency.single_thread;
 import java.util.ArrayList;
 
 public class Gearbox {
+
     private ArrayList<Gear> gears;
+
     private int maxGears;
+
     private int currentGear = 0;
+
     private boolean clutchIsIn;
 
     // Exposing Gearbox not the Gear itself
@@ -16,7 +20,7 @@ public class Gearbox {
         this.gears.add(neutral);
 
         for (int i = 0; i < maxGears; i++) {
-            addGear(i, i * 5.3);
+            this.addGear(i, i * 5.3);
         }
     }
 
@@ -45,11 +49,14 @@ public class Gearbox {
             System.out.println("Scream!!");
             return 0.0;
         }
+
         return revs * gears.get(currentGear).getRatio();
     }
 
     private class Gear {
+
         private int gearNumber;
+
         private double ratio;
 
         public Gear(int gearNumber, double ratio) {
@@ -64,5 +71,7 @@ public class Gearbox {
         public double driveSpeed(int revs) {
             return revs * (this.ratio);
         }
+
     }
+
 }

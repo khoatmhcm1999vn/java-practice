@@ -3,7 +3,7 @@ package com.mk.examples.algorithm.recursion;
 public class BinarySearch {
 
     public static void main(String[] args) {
-        int[] arr = new int[]{1, 4, 5, 6, 9, 11};
+        int[] arr = new int[] {1, 4, 5, 6, 9, 11};
         int target = 12;
         BinarySearch binarySearch = new BinarySearch();
         int index = binarySearch.binarySearch(arr, 0, arr.length - 1, target);
@@ -22,8 +22,10 @@ public class BinarySearch {
             return midIndex;
         }
         if (currentValue > target) {
-            return binarySearch(arr, startIndex, midIndex - 1, target);
+            return this.binarySearch(arr, startIndex, midIndex - 1, target);
         }
-        return binarySearch(arr, midIndex + 1, endIndex, target);
+
+        return this.binarySearch(arr, midIndex + 1, endIndex, target);
     }
+
 }

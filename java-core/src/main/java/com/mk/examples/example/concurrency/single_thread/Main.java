@@ -3,8 +3,10 @@ package com.mk.examples.example.concurrency.single_thread;
 import java.util.Scanner;
 
 public class Main {
-    private static Scanner scanner = new Scanner(System.in);
-    private static Button btnPrint = new Button("Print");
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    private static final Button btnPrint = new Button("Print");
 
     private static void listen() {
         boolean quit = false;
@@ -24,7 +26,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-//
+
 //        class ClickListener implements Button.OnClickListener {
 //            public ClickListener() {
 //                System.out.println("I've been attached");
@@ -42,7 +44,7 @@ public class Main {
                 System.out.println(title + " was Clicked");
             }
         });
-//
+
 //        btnPrint.setOnClickListener(new ClickListener());
         //listen();
 
@@ -57,4 +59,5 @@ public class Main {
         mcLaren.operateClutch(false);
         System.out.println(mcLaren.wheelSpeed(6000));
     }
+
 }
