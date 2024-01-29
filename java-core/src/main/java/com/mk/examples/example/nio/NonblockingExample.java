@@ -8,30 +8,32 @@ import java.util.concurrent.Executors;
 public class NonblockingExample {
 
     private final Database database;
+
     private final ExecutorService executorService;
+
     private final Map<String, Handler> userRequestHandlers;
 
     public NonblockingExample() {
-        database = new Database();
-        executorService = Executors.newFixedThreadPool(10);
-        userRequestHandlers = new HashMap<>();
-        userRequestHandlers.put("userInfoGet", database::getUserInfo);
-        userRequestHandlers.put("friendListGet", database::getFriendList);
-        userRequestHandlers.put("messageListGet", database::getMessageList);
+        this.database = new Database();
+        this.executorService = Executors.newFixedThreadPool(10);
+        this.userRequestHandlers = new HashMap<>();
+        this.userRequestHandlers.put("userInfoGet", this.database::getUserInfo);
+        this.userRequestHandlers.put("friendListGet", this.database::getFriendList);
+        this.userRequestHandlers.put("messageListGet", this.database::getMessageList);
     }
 
     public void receivedUserRequest(String requestInput) {
-        Request request = processRequestInput(requestInput);
-        executorService.execute(() -> {
-            Object response = handlerRequest(request);
-            executorService.execute(() ->
-                    responseToUser(request.getUserId(), response)
+        Request request = this.processRequestInput(requestInput);
+        this.executorService.execute(() -> {
+            Object response = this.handlerRequest(request);
+            this.executorService.execute(() ->
+                    this.responseToUser(request.getUserId(), response)
             );
         });
     }
 
     private Object handlerRequest(Request request) {
-        Handler handler = userRequestHandlers.get(request.getApi());
+        Handler handler = this.userRequestHandlers.get(request.getApi());
         Object result = handler.handle(request.getUserId());
         return result;
     }
@@ -52,11 +54,15 @@ public class NonblockingExample {
     }
 
     public interface Handler {
+
         Object handle(String userId);
+
     }
 
     public static class Request {
+
         private final String api;
+
         private final String userId;
 
         public Request(String api, String userId) {
@@ -65,15 +71,16 @@ public class NonblockingExample {
         }
 
         public String getApi() {
-            return api;
+            return this.api;
         }
 
         public String getUserId() {
-            return userId;
+            return this.userId;
         }
     }
 
     public static class Database {
+
         public String getUserInfo(String userId) {
             delay(1000);
             return "id: " + userId + ", name: Monkey";
@@ -88,6 +95,7 @@ public class NonblockingExample {
             delay(1000);
             return "hello, world";
         }
+
     }
 
     public static void main(String[] args) {
@@ -99,4 +107,5 @@ public class NonblockingExample {
             nio.receivedUserRequest("messageListGet:" + user);
         }
     }
+
 }

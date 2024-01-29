@@ -10,11 +10,11 @@ public class BlockingIOExample {
     private final Map<String, Handler> userRequestHandlers;
 
     public BlockingIOExample() {
-        database = new Database();
-        userRequestHandlers = new HashMap<>();
-        userRequestHandlers.put("userInfoGet", database::getUserInfo);
-        userRequestHandlers.put("friendListGet", database::getFriendList);
-        userRequestHandlers.put("messageListGet", database::getMessageList);
+        this.database = new Database();
+        this.userRequestHandlers = new HashMap<>();
+        this.userRequestHandlers.put("userInfoGet", this.database::getUserInfo);
+        this.userRequestHandlers.put("friendListGet", this.database::getFriendList);
+        this.userRequestHandlers.put("messageListGet", this.database::getMessageList);
     }
 
     public void receivedUserRequest(String requestInput) {
@@ -24,7 +24,7 @@ public class BlockingIOExample {
     }
 
     private Object handlerRequest(Request request) {
-        Handler handler = userRequestHandlers.get(request.getApi());
+        Handler handler = this.userRequestHandlers.get(request.getApi());
         return handler.handle(request.getUserId());
     }
 
